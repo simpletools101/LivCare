@@ -33,16 +33,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${LexendFont.className} antialiased`}>
-        <div className="main-container flex flex-col h-screen">
-          <header>
-            <Titlebar />
-          </header>
-          <div className="flex flex-1">
-            <div className="sidemenu  w-[250px] h-full ">
-              <SideMenu/>
-            </div>
-            <div className="main-content bg-neutral-900 flex-1">{children}</div>
-          </div>
+        <div className="main-container flex flex-col h-screen w-full bg-[#09090b]">
+          {children}
         </div>
       </body>
     </html>

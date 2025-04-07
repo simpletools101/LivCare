@@ -29,7 +29,7 @@ export default function UserAccountItem() {
             <DropdownMenuContent className='bg-neutral-950'>
                 <DropdownMenuLabel className="cursor-default p-2">
                     <div className="flex w-full items-center">
-                        <Avatar>
+                        <Avatar className='cursor-pointer'>
                             <AvatarImage
                                 src="https://images.pexels.com/photos/39853/woman-girl-freedom-happy-39853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                 alt="@shadcn"
@@ -41,10 +41,9 @@ export default function UserAccountItem() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem className="cursor-pointer">Logo out</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">Settings</DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer">Help</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer">Logo out</DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

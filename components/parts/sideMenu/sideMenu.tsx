@@ -9,9 +9,6 @@ export default function SideMenu() {
         <SideMenuItem content="Home" link="/">
           <House />
         </SideMenuItem>
-        <SideMenuItem content="Symptoms" link="/symptoms">
-          <Rat />
-        </SideMenuItem>
         <SideMenuItem content="History" link="/history">
           <History />
         </SideMenuItem>

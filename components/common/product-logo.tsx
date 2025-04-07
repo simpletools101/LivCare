@@ -5,7 +5,10 @@ import Link from "next/link";
 export default function ProductLogo() {
   return (
     <Link href={"/"} className="flex items-center">
-      <span className="text-lg font-bold text-[#FF0]">LivCare</span>
+      <div>
+        <Image src={productImage} alt="Product Image" width={40} height={40}/>
+      </div>
+      <span className="text-xl font-bold ml-5">LivCare</span>
     </Link>
   );
 }
