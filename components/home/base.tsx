@@ -27,7 +27,7 @@ export default function BaseHome() {
         <div className="h-full relative  w-full">
             <WelcomeUI willHideWelcome={isWelcomeUIVisible} />
             <div className="w-full flex items-end justify-center h-fit">
-                <div className="w-[60%] max-[465px]:w-[80%] max-[390px]:w-[90%]">
+                <div className="w-[70%] max-[688px]:w-[80%] max-[589px]:w-[90%]   max-[465px]:w-[90%] max-[390px]:w-[90%]">
                     <MessageContainer
                         requestHidingOfWelcomeUI={hideWelcomeUI}
                         requestShowingOfWelcomeUI={showWelcomeUI}

@@ -5,7 +5,7 @@ import { AlignJustify, History } from 'lucide-react'
 
 export default function Titlebar() {
     return (
-        <div className="h-[70px] flex justify-between items-center">
+        <div className="h-[70px] flex justify-between items-center border">
             <div className="flex items-center space-x-5 ml-3">
                 <ProductLogo />
             </div>

@@ -20,7 +20,7 @@ export default function WelcomeUI({ willHideWelcome }: WelcomeUIProps) {
             }}
             className="flex-col  items-center p-12 justify-center w-full max-[578px]:p-8"
         >
-            <div className=" flex items-center flex-col justify-center w-[80%] max-[792px]:w-[90%]  max-[714px]:w-[100%] ">
+            <div className="mt-6 flex items-center flex-col justify-center w-[70%] max-[792px]:w-[90%]  max-[714px]:w-[100%] ">
                 <div className="">
                     <Toon size={40} />
                 </div>

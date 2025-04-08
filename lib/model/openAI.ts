@@ -1,52 +1,46 @@
-import OpenAI from 'openai'
+import { GoogleGenAI } from "@google/genai";
 
-const openai = new OpenAI({
-    apiKey: process.env.NEXTJS_OPENAPIKEY, // Add your OpenAI API key here
-})
+const ai = new GoogleGenAI({
+    apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY!,
+});
 
 export async function requestFromAI(userRequestContent: string) {
-    const systemInstruction = {
-        system: {
-            role: 'veterinarian_assistant',
-            description: 'Provides information about cow diseases based on user input.',
-            constraints: ['Do not offer medical advice for humans.', 'All responses must be valid JSON.'],
-        },
-        behavior: {
-            information_scope: 'Only provide details about cow diseases.',
-            interaction_rules: [
-                'Extract disease-related keywords from user input.',
-                'Return structured data with disease name, symptoms, causes, and possible treatments.',
-            ],
-        },
+
+    const prompt = `
+Extract cow disease symptoms from the following input and give me one line answer .
+
+Return a single JSON object with:
+- "diseases": in one sentence
+- "recommendations": in one sentence
+
+Only return one JSON object. No explanations, no additional text, no markdown.
+
+User input: "${userRequestContent}"
+`;
+
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-2.0-flash",
+            contents: [{
+                role: "user", parts: [
+                    { text: prompt }
+                ]
+            }],
+        });
+
+        
+        let RESPONSE_TEXT = response.text!;
+
+        const cleanedString = RESPONSE_TEXT.replace(/```json|```/g, '').trim();
+        console.log("formated-data",cleanedString)
+        const currentJSON = JSON.parse(cleanedString)
+       
+
+        return {
+            aiAnswer: currentJSON.diseases || "Disease info not found.",
+            aiRecommendation: currentJSON.recommendations || "No recommendation.",
+        };
+    } catch (error) {
+
     }
-
-    const response = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo', 
-        messages: [
-            {
-                role: 'system',
-                content: JSON.stringify(systemInstruction),
-            },
-            {
-                role: 'user',
-                content: userRequestContent,
-            },
-        ],
-        response_format: {
-            type: 'json_object',
-        },
-    })
-  // Parse the AI's response
-  const aiResponse = response.choices[0].message.content;
-
-  // Extract disease information and recommendations
-  const parsedResponse = {
-
-    //@ts-ignore
-      aiAnswer: aiResponse.disease || "Disease information not found.",
-    //@ts-ignore
-      aiRecommendation: aiResponse.recommendation || "Recommendation not available."
-  };
-
-  return parsedResponse;
 }

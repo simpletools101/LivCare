@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ChatInput from '../chatInput/chatInput'
 import ChatUI from '../chatUI/chatUi'
+import eventEmitter from '@/lib/eventMitter'
 
 type MessageContainerProps = {
     requestHidingOfWelcomeUI: () => void
@@ -13,11 +14,7 @@ export default function MessageContainer({
     requestHidingOfWelcomeUI,
     requestShowingOfWelcomeUI,
 }: MessageContainerProps) {
-    /***
-     * UserMessages
-     */
-    const [userMessage, setUserMessage] = useState<string>('welcome')
-
+  
     const [isChatUIVisible, setChatUIVisible] = useState(false)
 
     /**
@@ -25,7 +22,7 @@ export default function MessageContainer({
      * @param message
      */
     function getCurrentUserMessage(message: string) {
-        setUserMessage(message)
+        eventEmitter.emit('userMessage', message);
     }
 
     /**
@@ -47,11 +44,11 @@ export default function MessageContainer({
     return (
         <div className=" flex flex-col items-center ">
             <ChatUI
-                currentUserMessage={userMessage}
+                
                 isChatUiVisible={isChatUIVisible}
                 chatUIHideFunc={willHideChatUI}
             />
-            <div className="w-[90%] absolute bottom-4 max-[389px]:w-[95%]">
+            <div className="w-[60%] absolute bottom-4 max-[521px]:w-[80%] -z-0 ">
                 <ChatInput
                     getMessage={getCurrentUserMessage}
                     requestChatUIVisiblity={willShowChatUI}

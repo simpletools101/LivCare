@@ -6,14 +6,16 @@ import UserQuestionTitle from './items/user-question-title'
 import ProgressLoader from './items/progress-loader'
 import OptionsCT from './items/optionsCT/optionsCt'
 import AnswerManager from './items/answerManger/answerManager'
+import "./style/mediaQuery.css"
+import { requestFromAI } from '@/lib/model/openAI'
+import eventEmitter from '@/lib/eventMitter'
 
 type ChatUIProps = {
     chatUIHideFunc: () => void
     isChatUiVisible: boolean
-    currentUserMessage: string
 }
 
-export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMessage }: ChatUIProps) {
+export default function ChatUI({ chatUIHideFunc, isChatUiVisible }: ChatUIProps) {
     /**
      *
      * Answer and Recommendation Area
@@ -25,9 +27,11 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMes
     }
 
     const [currentAnswerRecommendation, setAnswerRecommendation] = useState<AnswerRecommendation>({
-        aiAnswer: '',
-        aiRecommendation: '',
-    })
+        aiAnswer: '...',
+        aiRecommendation: '...',
+    });
+
+    const [currentUserRequestMessage, setcurrentUserRequestMessage] = useState("...")
 
     const [isAnswerAreaVisible, setAnswerAreaVisible] = useState(true)
 
@@ -38,30 +42,7 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMes
         setAnswerAreaVisible(false)
     }
 
-    /**
-     * ---------------------------------------------------------------------------------------------------------
-     * CURRENT AI QUERY MANAGER
-     * =========================================================================================================
-     */
 
-    const [currentQuery, setCurrentQuery] = useState('')
-
-    /**
-     * --=========================================================
-     * Fetch function
-     * ============================================================
-     */
-
-    const handleRequest = async () => {
-        const res = await fetch('/api/ai', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userRequestContent: currentQuery }),
-        })
-
-        const data = await res.json()
-        setAnswerRecommendation(data)
-    }
 
     /**
      * Diagnosiing Loader
@@ -109,38 +90,62 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMes
         closeOptionsCTItem()
     }
 
-    function ___spinRoutine() {
+
+    let executionCount = 0;
+
+    async function ___spinRoutine(userRequest: string) {
+
+        executionCount++;
+        console.log(`Request #${executionCount}:`, userRequest);
+
+        if (executionCount > 5) {
+            console.log("Loop detected: Too many executions!");
+            return; // Prevent further executions if there's a loop
+        }
+
+        setcurrentUserRequestMessage(userRequest)
         hideAnswerArea()
-        showDiagnosingLoader()
-        handleRequest().then(() => {
+        showDiagnosingLoader();
+
+
+
+
+        requestFromAI(userRequest).then((data) => {
             hideDiagnosingLoader()
             showAnswerArea()
+            console.log("Received-Data-fromAI", data);
+            setAnswerRecommendation({ aiAnswer: data!.aiAnswer, aiRecommendation: data!.aiRecommendation })
+
         })
+
+
     }
 
     useEffect(() => {
-        /**
-         * The current User message from the AI Input Box
-         */
-        setCurrentQuery(currentUserMessage)
 
-        /**
-         * Send the Ai request everytime the current user input changes
-         */
-        //should show the diagnosing item
+        const HandleEventEmitterMessaging = (message: string) => {
+            console.log("receivedMessage", message)
+            ___spinRoutine(message)
+        }
 
-        ;((s: string) => {
-            if (currentUserMessage.trim() === '') return
-            ___spinRoutine()
-        })('Daddy Dot get me a slime')
-    }, [currentUserMessage])
+        eventEmitter.on('userMessage', HandleEventEmitterMessaging);
+
+        return () => {
+            eventEmitter.off('userMessage', HandleEventEmitterMessaging);
+
+        }
+
+    }, [])
+
+
+
 
     return (
         <div
             style={{
                 display: isChatUiVisible ? 'block' : 'none',
             }}
-            className="border-t border-t-yellow-300 transition-all h-[490px] w-full relative   mb-2 border "
+            className="chat-ui-item border-t z-10 border-t-yellow-300 transition-all w-full relative   mb-2 border "
         >
             <button
                 title="Close the Chat"
@@ -151,7 +156,7 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMes
             </button>
             <main className="mt-8 block h-[90%]  relative overflow-x-hidden">
                 <div className="main-content  h-full overflow-hidden">
-                    <UserQuestionTitle currentQuestion={currentUserMessage} />
+                    <UserQuestionTitle currentQuestion={currentUserRequestMessage} />
                     <div
                         style={{
                             display: isLoaderVisible ? 'block' : 'none',
@@ -177,7 +182,7 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible, currentUserMes
                             display: isAnswerAreaVisible ? 'block' : 'none',
                         }}
                     >
-                        <AnswerManager />
+                        <AnswerManager currentGivenAnswer={currentAnswerRecommendation.aiAnswer} diseaseRecommendation={currentAnswerRecommendation.aiRecommendation} />
                     </div>
                 </div>
                 <div className="btn-content-area"></div>

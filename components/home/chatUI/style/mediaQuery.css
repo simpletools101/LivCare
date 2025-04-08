@@ -1,0 +1,28 @@
+.chat-ui-item {
+    height:85vh;
+}
+
+
+@media(max-height:908px) {
+    .chat-ui-item {
+        height: 81vh;
+    }
+}
+
+@media(max-height:768px) {
+    .chat-ui-item {
+        height: 79vh;
+    }
+}
+
+@media(max-height:666px) {
+    .chat-ui-item {
+        height: 75vh;
+    }
+}
+
+@media(max-height:578px) {
+    .chat-ui-item {
+        height: 70vh;
+    }
+}

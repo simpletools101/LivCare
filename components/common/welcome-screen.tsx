@@ -5,7 +5,6 @@ import Toon from '../home/toon'
 export default function WelcomeScreen() {
     return (
         <div className=' h-screen flex flex-col items-center  justify-between w-full relative'>
-            <div className='absolute text-black bg-yellow-300  font-bold p-2 text-sm top-0 right-0'>PROTOTYPE</div>
             <div className='ml-32  p-24 flex flex-col space-y-12 mt-8   max-[1033px]:ml-4 max-[1033px]:p-12 max-[605px]:p-6 max-[374px]:ml-2 max-[374px]:p-8 '>
                 <div className="flex  flex-col space-x-8 ">
                     <Toon size={45} />
