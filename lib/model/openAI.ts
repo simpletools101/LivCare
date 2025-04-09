@@ -4,6 +4,8 @@ const ai = new GoogleGenAI({
     apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY!,
 });
 
+console.log("CURRENT_KEU",process.env.NEXT_PUBLIC_GEMINI_API_KEY!)
+
 export async function requestFromAI(userRequestContent: string) {
 
     const prompt = `
