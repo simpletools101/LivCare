@@ -8,7 +8,7 @@ export default function ProductLogo() {
       <div>
         <Image src={productImage} alt="Product Image" width={35} height={35}/>
       </div>
-      <span className="max-[730px]:text-lg text-xl font-bold ml-5">LivCare</span>
+      <span className="max-[730px]:text-lg text-xl font-light ml-5">LivCare</span>
     </Link>
   );
 }

@@ -142,3 +142,13 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #666; /* Slightly lighter on hover */
 }
+
+
+
+
+/* Optional: Disable transitions during resizing */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

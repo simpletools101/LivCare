@@ -1,7 +1,7 @@
 'use client'
 
-import Toon from '../toon'
-import local from 'next/font/local'
+import LvLogo from "@/components/common/lv-logo"
+
 
 type WelcomeUIProps = {
     willHideWelcome: boolean
@@ -21,9 +21,7 @@ export default function WelcomeUI({ willHideWelcome }: WelcomeUIProps) {
             className="flex-col  items-center p-12 justify-center w-full max-[578px]:p-8"
         >
             <div className="mt-6 flex items-center flex-col justify-center w-[70%] max-[792px]:w-[90%]  max-[714px]:w-[100%] ">
-                <div className="">
-                    <Toon size={40} />
-                </div>
+                <LvLogo/>
                 <h2 className="mt-4 text-4xl text-center max-[678px]:text-3xl max-[505px]:text-2xl max-[345px]:text-xl">
                     Hey there! Got a cow in trouble? Tell me what's up...
                 </h2>

@@ -11,7 +11,7 @@ export default function DashBoardContainer() {
             </header>
             <div className="flex flex-1  w-full">
 
-                <div className="main-content bg-[#09090b] flex-1 h-full">
+                <div className="main-content flex-1 h-full">
                     <BaseHome />
                 </div>
             </div>

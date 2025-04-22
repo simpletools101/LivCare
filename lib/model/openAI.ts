@@ -4,7 +4,6 @@ const ai = new GoogleGenAI({
     apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY!,
 });
 
-console.log("CURRENT_KEU",process.env.NEXT_PUBLIC_GEMINI_API_KEY!)
 
 export async function requestFromAI(userRequestContent: string) {
 
@@ -12,8 +11,8 @@ export async function requestFromAI(userRequestContent: string) {
 Extract cow disease symptoms from the following input and give me one line answer .
 
 Return a single JSON object with:
-- "diseases": in one sentence
-- "recommendations": in one sentence
+- "diseases": Add possible diease about the symptom in a sentence form.
+- "solution": in one sentence or a words, add a possible medication(Uganda) for the symptom and also remove the veterinary stuff.
 
 Only return one JSON object. No explanations, no additional text, no markdown.
 
@@ -40,7 +39,7 @@ User input: "${userRequestContent}"
 
         return {
             aiAnswer: currentJSON.diseases || "Disease info not found.",
-            aiRecommendation: currentJSON.recommendations || "No recommendation.",
+            aiRecommendation: currentJSON.solution || "No recommendation.",
         };
     } catch (error) {
 

@@ -26,3 +26,55 @@
         height: 70vh;
     }
 }
+
+
+
+
+.stupid {
+    width: 600px;
+}
+
+@media(max-width:875px) {
+    .stupid {
+        width: 550px;
+    }
+}
+
+@media(max-width:829px) {
+    .stupid {
+        width: 500px;
+    }
+}
+
+@media(max-width:750px) {
+    .stupid {
+        width: 450px;
+    }
+}
+
+@media(max-width:530px) {
+    .stupid {
+        width: 400px;
+    }
+}
+
+@media(max-width:476px) {
+    .stupid {
+        width: 350px;
+    }
+}
+
+@media(max-width:422px) {
+    .stupid {
+        width: 320px;
+    }
+}
+
+@media(max-width:390px) {
+    .stupid {
+        width: 250px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
