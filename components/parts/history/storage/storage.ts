@@ -2,6 +2,7 @@ interface IHistoryData {
     query: string
     possibleDisease: string
     possibleSolution: string
+    id:string;
 }
 
 /**

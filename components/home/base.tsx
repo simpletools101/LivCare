@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import MessageContainer from './messageContainer/messageContainer'
 import WelcomeUI from './welcome/welcome'
+import SavyBackground from '../common/savy-bg'
 
 export default function BaseHome() {
 
@@ -25,6 +26,7 @@ export default function BaseHome() {
 
     return (
         <div className="h-full relative  w-full">
+            <SavyBackground/>
             <WelcomeUI willHideWelcome={isWelcomeUIVisible} />
             <div className="w-full flex items-end justify-center h-fit">
                 <div className="w-[70%] max-[688px]:w-[80%] max-[589px]:w-[90%]   max-[465px]:w-[90%] max-[390px]:w-[90%]">

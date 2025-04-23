@@ -12,7 +12,7 @@ Extract cow disease symptoms from the following input and give me one line answe
 
 Return a single JSON object with:
 - "diseases": Add possible diease about the symptom in a sentence form.
-- "solution": in one sentence or a words, add a possible medication(Uganda) for the symptom and also remove the veterinary stuff.
+- "solution": give the name of the possible solution (drug name) and how it can be administered and dosage. give results based in uganda setting. add consult a veteran doctor for proper advice and treatment at the end of the solution.
 
 Only return one JSON object. No explanations, no additional text, no markdown.
 

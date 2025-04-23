@@ -10,6 +10,7 @@ import { requestFromAI } from '@/lib/model/openAI'
 import eventEmitter from '@/lib/eventMitter'
 import { addDataToExistingStorage, intializeStorageBucket } from '@/components/parts/history/storage/storage'
 import { toast } from 'sonner'
+import {nanoid} from "nanoid"
 import './style/mediaQuery.css'
 
 type ChatUIProps = {
@@ -111,6 +112,7 @@ export default function ChatUI({ chatUIHideFunc, isChatUiVisible }: ChatUIProps)
             hideDiagnosingLoader()
             showAnswerArea()
             addDataToExistingStorage({
+                id : nanoid(),
                 query: userRequest,
                 possibleDisease: data!.aiAnswer,
                 possibleSolution: data!.aiRecommendation,
