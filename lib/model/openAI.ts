@@ -13,7 +13,7 @@ Extract cow disease symptoms from the following input and give me one line answe
 Return a single JSON object with:
 - "diseases": Add possible diease about the symptom in a sentence form.
 - "solution": give the name of the possible solution (drug name) and how it can be administered and dosage. give results based in uganda setting. add consult a veteran doctor for proper advice and treatment at the end of the solution.
-
+- "error" :  set true or false if there is no possible solution
 Only return one JSON object. No explanations, no additional text, no markdown.
 
 User input: "${userRequestContent}"
@@ -34,7 +34,8 @@ User input: "${userRequestContent}"
 
         const cleanedString = RESPONSE_TEXT.replace(/```json|```/g, '').trim();
         console.log("formated-data",cleanedString)
-        const currentJSON = JSON.parse(cleanedString)
+        const currentJSON = JSON.parse(cleanedString);
+        console.log(currentJSON)
        
 
         return {
