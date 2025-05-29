@@ -65,7 +65,7 @@ export default function ChatInput({
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
                 autoFocus
-                placeholder="The Cow is ..."
+                placeholder="Type Symptom here.."
                 rows={1}
                 className="bg-neutral-100 dark:bg-neutral-900 ml-4 flex max-h-[200px] min-h-[40px] flex-1 resize-none overflow-y-auto  outline-none transition-[height] duration-150 ease-in-out p-2 text-base leading-[1.4]"
             ></textarea>
