@@ -13,7 +13,8 @@ type UserData = {
 
 export async function signupWithGoogle() {
  
-    let redirectLink = process.env.NEXT_FORMAT_DEV ? "http://localhost:3000/dashboard" : "https://liv-care-.vercel.app/dashboard"
+    let redirectLink = process.env.NEXT_FORMAT_DEV == "isExists" ? "http://localhost:3000/dashboard" : "https://liv-care.vercel.app/dashboard"
+    console.log("redicte",redirectLink)
 
     let  googleUserData:"didSignIn" | "failed" | "unknown" = "unknown"
 
