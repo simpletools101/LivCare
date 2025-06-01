@@ -46,7 +46,7 @@ export function HistoryDialogComponent(props: HistoryDialogComponentProps) {
                         {props.data.map((item) => {
                             return (
                                 <HistoryItem
-                            
+                                    key={item.id}
                                     query={item.query}
                                     possibleDisease={item.possibleDisease}
                                     possibleSolution={item.possibleSolution}

@@ -2,33 +2,26 @@
 
 import LvLogo from "@/components/common/lv-logo"
 
-
 type WelcomeUIProps = {
-    willHideWelcome: boolean
-    /**
-     *
-     * @param suggestions
-     * @returns
-     */
+  willHideWelcome: boolean
 }
 
 export default function WelcomeUI({ willHideWelcome }: WelcomeUIProps) {
-    return (
-        <div
-            style={{
-                display: willHideWelcome ? 'flex' : 'none',
-            }}
-            className="flex-col  items-center p-12 justify-center w-full max-[578px]:p-8"
-        >
-            <div className="mt-6 flex items-center flex-col justify-center w-[70%] max-[792px]:w-[90%]  max-[714px]:w-[100%] ">
-                <LvLogo/>
-                <h2 className="mt-4 text-4xl text-center max-[678px]:text-3xl max-[505px]:text-2xl max-[345px]:text-xl">
-                    Hey there! Got a cow in trouble? Tell me what's up...
-                </h2>
-                <p className="mt-6 font-light text-xl text-center text-neutral-500 max-[455px]:mt-2 max-[428px]:text-[17px]">
-                    "Describe the symptoms, and I'll help you figure out what's wrong."
-                </p>
-            </div>
-        </div>
-    )
+  if (!willHideWelcome) return null
+
+  return (
+    <div className="flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-8 lg:px-12 py-12">
+      <div className="mt-6 flex flex-col items-center justify-center w-full max-w-3xl px-2 sm:px-4">
+        <LvLogo />
+
+        <h2 className="mt-4 text-center text-2xl sm:text-3xl md:text-4xl font-semibold">
+          Hey there! Got a cow in trouble? Tell me what's up...
+        </h2>
+
+        <p className="mt-4 sm:mt-6 text-center text-neutral-500 text-base sm:text-lg md:text-xl font-light">
+          "Describe the symptoms, and I'll help you figure out what's wrong."
+        </p>
+      </div>
+    </div>
+  )
 }

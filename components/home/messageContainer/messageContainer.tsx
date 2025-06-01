@@ -6,6 +6,7 @@ import ChatUI from '../chatUI/chatUi'
 import eventEmitter from '@/lib/eventMitter'
 
 type MessageContainerProps = {
+    userID: string
     requestHidingOfWelcomeUI: () => void
     requestShowingOfWelcomeUI: () => void
 }
@@ -13,8 +14,8 @@ type MessageContainerProps = {
 export default function MessageContainer({
     requestHidingOfWelcomeUI,
     requestShowingOfWelcomeUI,
+    userID,
 }: MessageContainerProps) {
-  
     const [isChatUIVisible, setChatUIVisible] = useState(false)
 
     /**
@@ -22,7 +23,7 @@ export default function MessageContainer({
      * @param message
      */
     function getCurrentUserMessage(message: string) {
-        eventEmitter.emit('userMessage', message);
+        eventEmitter.emit('userMessage', message)
     }
 
     /**
@@ -43,17 +44,14 @@ export default function MessageContainer({
 
     return (
         <div className=" flex flex-col items-center ">
-            <ChatUI
-                
-                isChatUiVisible={isChatUIVisible}
-                chatUIHideFunc={willHideChatUI}
-            />
-            <div className="w-[60%] absolute bottom-4 max-[521px]:w-[80%] -z-0 ">
+            <ChatUI currentUserID={userID} isChatUiVisible={isChatUIVisible} chatUIHideFunc={willHideChatUI} />
+            <div className="w-[60%] absolute bottom-4 max-[521px]:w-[80%] -z-0 mb-4 ">
                 <ChatInput
                     getMessage={getCurrentUserMessage}
                     requestChatUIVisiblity={willShowChatUI}
                     isChatUIVisible={isChatUIVisible}
                 />
+               
             </div>
         </div>
     )
