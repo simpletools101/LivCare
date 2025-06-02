@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { logout } from '@/lib/auth/logout'
 import { useRouter } from 'next/navigation'
+import {_redirectLink2} from "@/lib/authURL"
 
 interface UserAccountItemProps {
     img_url: string
@@ -23,7 +24,7 @@ export default function UserAccountItem(props: UserAccountItemProps) {
 
     const onWillLogoOut = () => {
         logout().then(() => {
-            router.push('/')
+            router.push(_redirectLink2)
         })
     }
 

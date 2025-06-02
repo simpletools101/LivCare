@@ -8,6 +8,7 @@ import { getGoogleUserData } from '@/lib/auth/userDataGoogleAuth'
 import { useRouter } from 'next/navigation'
 import IndeterminateCircularProgress from './progresst'
 import Spinner from './progresst'
+import { _redirectLink2 } from '@/lib/authURL'
 
 export default function WelcomeScreen() {
     const [userName, setUserName] = useState('')
@@ -26,8 +27,8 @@ export default function WelcomeScreen() {
         const loggedIn = await isUserLoggedIn()
         if (loggedIn) {
             const userData = await getGoogleUserData()
-            setUserName(userData!.user_metadata.full_name)
             setLoading(false)
+            setUserName(userData!.user_metadata.full_name)
 
         } else {
             setShowGoogleButton(true)
@@ -71,7 +72,7 @@ export default function WelcomeScreen() {
                             style={{
                                 display: isLoading ? 'none' : 'block',
                             }}
-                            onClick={() => router.push('/dashboard')}
+                            onClick={() => router.push(`${_redirectLink2}/dashboard`)}
                             className="px-6 py-2 text-yellow-300 border border-yellow-300 rounded-md transition hover:bg-yellow-300 hover:text-white w-fit"
                         >
                             Let's Continue...

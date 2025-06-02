@@ -1,3 +1,6 @@
+
+
+
 'use client'
 
 import { createContext, use, useEffect, useState } from 'react'
@@ -10,6 +13,7 @@ import { getGoogleUserData } from '@/lib/auth/userDataGoogleAuth'
 import { getUserMessages } from '@/lib/database/chat/getMessages'
 import { IHistoryData } from '../parts/history/history-dialog'
 import { useRouter } from 'next/navigation'
+import {_redirectLink2} from "@/lib/authURL"
 import { SupabaseClient } from '@supabase/supabase-js'
 
 export const IdContext = createContext<string>('')
@@ -96,7 +100,7 @@ export default function BaseHome(props: IBaseHome) {
                 console.log(session.user.email)
                 createDatabaseModel()
             } else {
-                router.push('/')
+                router.push(_redirectLink2)
             }
         }
         /**
@@ -106,7 +110,7 @@ export default function BaseHome(props: IBaseHome) {
             if (event === 'SIGNED_IN') {
                 // Store session if needed
                 // Clean up the URL (remove the access token from the hash)
-                window.history.replaceState({}, document.title, '/dashboard')
+                window.history.replaceState({}, document.title, `${_redirectLink2}/dashboard`)
             }
         })
 
