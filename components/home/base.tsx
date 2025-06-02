@@ -110,7 +110,6 @@ export default function BaseHome(props: IBaseHome) {
             if (event === 'SIGNED_IN') {
                 // Store session if needed
                 // Clean up the URL (remove the access token from the hash)
-                window.history.replaceState({}, document.title, `${_redirectLink2}/dashboard`)
             }
         })
 
