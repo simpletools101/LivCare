@@ -23,7 +23,8 @@ export async function signupWithGoogle() {
     const {data,error} = await supabaseClient.auth.signInWithOAuth({
         provider : "google",
         options : {
-            redirectTo : _redirectLink
+            redirectTo : _redirectLink,
+            skipBrowserRedirect : true
         }
     })
 
