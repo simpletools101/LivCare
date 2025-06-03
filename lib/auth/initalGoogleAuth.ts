@@ -24,7 +24,6 @@ export async function signupWithGoogle() {
         provider : "google",
         options : {
             redirectTo : _redirectLink,
-            skipBrowserRedirect : true
         }
     })
 
